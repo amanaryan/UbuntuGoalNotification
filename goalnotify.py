@@ -4,6 +4,13 @@ from bs4 import BeautifulSoup
 import urllib2
 import os
 
+SNSWITCH=raw_input('Do you want sound notifications('+'yes/no): ')
+if SNSWITCH=='yes':
+	time=0.5
+elif SNSWITCH=='y':
+	time=0.5
+else:
+	time=0.01
 URL=raw_input("Paste the URL of the match: ")
 try:
     response=urllib2.urlopen(URL)
@@ -42,7 +49,7 @@ while (True):
 		pynotify.init('Score Updates')
 		notification = pynotify.Notification(title, text, icon)
 		notification.set_urgency(pynotify.URGENCY_NORMAL)
-		os.system('play --no-show-progress --null --channels 1 synth %s sine %f' % ( 0.5, 3000))
+		os.system('play --no-show-progress --null --channels 1 synth %s sine %f' % (time, 3000))
 		notification.show()
 		Initial_Away_Score=Away_Score
 		Initial_Home_Score=Home_Score
