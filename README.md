@@ -10,3 +10,6 @@ or
 easy_install beautifulsoup4
 
 sudo apt-get install python-notify
+
+
+![alt tag](https://raw.githubusercontent.com/williamanaryan/UbuntuGoalNotification/master/Screenshot.png)
