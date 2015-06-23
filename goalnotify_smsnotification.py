@@ -1,0 +1,72 @@
+import pynotify
+import urllib2
+from bs4 import BeautifulSoup
+import urllib2
+import os
+from twilio.rest import TwilioRestClient 
+
+ # put your own credentials and details here
+
+yourmobilenumber="+91###########3"
+twilionumber="+1############"
+your_account_sid="##############"
+your_auth_token="###############"
+
+SNSWITCH=raw_input('Do you want sound notifications('+'yes/no): ')
+if SNSWITCH=='yes':
+	time=0.5
+elif SNSWITCH=='y':
+	time=0.5
+else:
+	time=0.01
+URL=raw_input("Paste the URL of the match: ")
+try:
+    response=urllib2.urlopen(URL)
+    html=response.read()
+except urllib2.HTTPError, e:
+    print 'HTTP Error, '+e.code
+    quit()
+except urllib2.URLError, e:
+    print 'URL Error '+e.args
+    quit()
+
+soup=BeautifulSoup(html)
+
+HomeTeam=soup.find('div',attrs={'class':'home'})
+HomeTeamName=HomeTeam.find('h2').text
+
+AwayTeam=soup.find('div',attrs={'class':'away'})
+AwayTeamName=AwayTeam.find('h2').text
+
+Initial_Home_Score='-1'
+Initial_Away_Score='-1'
+
+title = str(HomeTeamName)+' Vs '+str(AwayTeamName)
+
+icon  = "/usr/share/icons/Humanity/emblems/32/emblem-ohno.png"
+ACCOUNT_SID = str(your_account_sid)
+AUTH_TOKEN = str(your_auth_token)
+ 
+client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN) 
+
+while (True):
+	response=urllib2.urlopen(URL)
+	soup=BeautifulSoup(response)
+	
+	Home_Score=soup.find('div',attrs={'class':'home-score'}).text
+	Away_Score=soup.find('div',attrs={'class':'away-score'}).text
+	
+	if(int(Home_Score)!=int(Initial_Home_Score)) or(int(Away_Score) != int(Initial_Away_Score)):
+		text  = str(Home_Score )+' - '+str(Away_Score)
+		pynotify.init('Score Updates')
+		notification = pynotify.Notification(title, text, icon)
+		notification.set_urgency(pynotify.URGENCY_NORMAL)
+		os.system('play --no-show-progress --null --channels 1 synth %s sine %f' % (time, 3000))
+		notification.show()
+		client.messages.create(
+			to=str(yourmobilenumber),
+			from_=str(twilionumber),
+			body=str(title)+' '+str(text),)
+
+		Initial_Away_Score=Away_Score
+		Initial_Home_Score=Home_Score
