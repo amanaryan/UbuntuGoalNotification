@@ -28,6 +28,6 @@ Verify your mobile number
 Get your SID and AUTH_TOKEN from https://www.twilio.com/user/account/settings
 Get your twilio Number from https://www.twilio.com/user/account/phone-numbers/incoming
 
-![alt tag](https://github.com/williamanaryan/UbuntuGoalNotification/blob/master/sms.png)
 
 ![alt tag](https://raw.githubusercontent.com/williamanaryan/UbuntuGoalNotification/master/Screenshot.png)
+![alt tag](https://github.com/williamanaryan/UbuntuGoalNotification/blob/master/sms.png)
