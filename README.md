@@ -11,5 +11,17 @@ easy_install beautifulsoup4
 
 sudo apt-get install python-notify
 
+For getting sms notifications, run the goalnotify_smsnotification.py file by using the command 
+
+python goalnotify_smsnotification.py
+
+for the FREE SMS notifications to work twilio moodule is required.To install twilio module type the following commands:
+
+pip install twilio
+
+or 
+
+easy_install twilio
+![alt tag](https://github.com/williamanaryan/UbuntuGoalNotification/blob/master/sms.png)
 
 ![alt tag](https://raw.githubusercontent.com/williamanaryan/UbuntuGoalNotification/master/Screenshot.png)
